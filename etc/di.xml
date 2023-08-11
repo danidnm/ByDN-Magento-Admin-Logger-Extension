@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- LOG Preference to use our logger (with IP, Line number, etc.) -->
+    <preference for="DanielNavarro\Logger\Model\LoggerInterface" type="DanielNavarro\Logger\Model\Logger"/>
+
+</config>
+
