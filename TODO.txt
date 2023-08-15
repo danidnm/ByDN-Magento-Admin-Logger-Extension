@@ -1,0 +1,5 @@
+Añadir funciones pendientes para debug, emergency, etc.
+Añadir configuración para niveles de log.
+Configuración para el token de Telegram
+Configuración para el email destino de las excepciones
+Enviar excepciones que se añaden al exception.log
