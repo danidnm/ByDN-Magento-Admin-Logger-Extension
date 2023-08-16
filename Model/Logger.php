@@ -4,11 +4,11 @@ namespace DanielNavarro\Logger\Model;
 
 class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\LoggerInterface
 {
-    const EMAIL_TEMPLATE = 'debug_email';
-    const XML_PATH_EMAIL_IDENTITY = 'contact/email/sender_email_identity';
+    public const EMAIL_TEMPLATE = 'debug_email';
+    public const XML_PATH_EMAIL_IDENTITY = 'contact/email/sender_email_identity';
 
-    const TELEGRAM_TOKEN = '6089710117:AAHrKiMs2Y4alNCsB-TrjEp52x56g6WUQbo';
-    const TELEGRAM_ID_GROUP = '-1001926424545';
+    public const TELEGRAM_TOKEN = '6089710117:AAHrKiMs2Y4alNCsB-TrjEp52x56g6WUQbo';
+    public const TELEGRAM_ID_GROUP = '-1001926424545';
 
     /**
      * @var \Magento\Framework\Translate\Inline\StateInterface
@@ -51,7 +51,9 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     private $jsonSerializer;
 
     /**
-     * Logger constructor.
+     * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
+     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
      * @param \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress
      * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
@@ -67,10 +69,9 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress,
         \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
         string $name = '',
-        array $handlers = array(),
-        array $processors = array()
-    )
-    {
+        array $handlers = [],
+        array $processors = []
+    ) {
         $this->inlineTranslation = $inlineTranslation;
         $this->transportBuilder = $transportBuilder;
         $this->scopeConfig = $scopeConfig;
@@ -84,43 +85,53 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     }
 
     /**
-     * @ingeritdoc
+     * Writes info in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
      */
-    public function writeInfo(
-        $method,
-        $line,
-        $message
-    )
+    public function writeInfo($method, $line, $message)
     {
         $this->writeLog($method, $line, $message, 'info');
     }
 
     /**
-     * @ingeritdoc
+     * Writes warning information in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
      */
-    public function writeWarning(
-        $method,
-        $line,
-        $message
-    )
+    public function writeWarning($method, $line, $message)
     {
         $this->writeLog($method, $line, $message, 'warning');
     }
 
     /**
-     * @ingeritdoc
+     * Writes error information in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
      */
-    public function writeError(
-        $method,
-        $line,
-        $message
-    )
+    public function writeError($method, $line, $message)
     {
         $this->writeLog($method, $line, $message, 'error');
     }
 
-    public function sendAlertTelegram($destination, $message) {
-
+    /**
+     * Sends a telegram alert
+     *
+     * @param string $destination
+     * @param string $message
+     * @return void
+     */
+    public function sendAlertTelegram($destination, $message)
+    {
         // Default destination if none
         if (empty($destination)) {
             $destination = self::TELEGRAM_ID_GROUP;
@@ -130,7 +141,6 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         $apiUrl = 'https://api.telegram.org/bot' . self::TELEGRAM_TOKEN . '/sendMessage';
 
         try {
-
             // Send message
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -139,13 +149,21 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_exec($ch);
             curl_close($ch);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
 
-    public function sendAlertEmail($destination, $subject, $message) {
+    /**
+     * Sends an email alert
+     *
+     * @param string $destination
+     * @param string $subject
+     * @param string $message
+     * @return void
+     */
+    public function sendAlertEmail($destination, $subject, $message)
+    {
 
         $trace = (new \Exception())->getTraceAsString();
         $trace = nl2br($trace);
@@ -175,13 +193,14 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
 
     /**
+     * Actual write in to the log file with specified parameters
+     *
      * @param string $method
      * @param string $line
      * @param string $message
@@ -192,9 +211,20 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         if (is_array($message) || is_object($message)) {
             $message = $this->jsonSerializer->serialize($message);
         }
-        $this->$logMethod($this->serverAddressIp . '-' . $this->remoteAddressIp . ' - ' . $method . ':' . $line . ' - ' . $message);
+        $this->$logMethod(
+            $this->serverAddressIp . '-' .
+            $this->remoteAddressIp . ' - ' .
+            $method . ':' .
+            $line . ' - ' .
+            $message
+        );
     }
 
+    /**
+     * Stores IP addresses to be logged
+     *
+     * @return void
+     */
     private function setIpAddresses()
     {
         $remoteAddressIp = $this->remoteAddress->getRemoteAddress();
