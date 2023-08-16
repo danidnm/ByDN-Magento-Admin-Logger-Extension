@@ -6,9 +6,11 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
 {
     private const LOGGER_EMAIL_NOTIFICATION_ENABLE = 'danielnavarro_logger/email/enable';
     private const LOGGER_EMAIL_NOTIFICATION_EMAIL = 'danielnavarro_logger/email/email';
+    private const LOGGER_EMAIL_EXCEPTIONS = 'danielnavarro_logger/email/exceptions';
     private const LOGGER_TELEGRAM_NOTIFICATION_ENABLE = 'danielnavarro_logger/telegram/enable';
     private const LOGGER_TELEGRAM_NOTIFICATION_TOKEN = 'danielnavarro_logger/telegram/token';
     private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'danielnavarro_logger/telegram/chat_id';
+    private const LOGGER_TELEGRAM_EXCEPTIONS = 'danielnavarro_logger/telegram/exceptions';
 
     /**
      * Check if email notification is enabled
@@ -20,6 +22,21 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(
             self::LOGGER_EMAIL_NOTIFICATION_ENABLE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Check if email exceptions by email is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isEmailExceptionsEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_EMAIL_EXCEPTIONS,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $storeId
         );
@@ -50,6 +67,21 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(
             self::LOGGER_TELEGRAM_NOTIFICATION_ENABLE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Check if email exceptions by email is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isTelegramExceptionsEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_TELEGRAM_EXCEPTIONS,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $storeId
         );

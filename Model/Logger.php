@@ -90,6 +90,19 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     }
 
     /**
+     * Writes debug in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
+     */
+    public function writeDebug($method, $line, $message)
+    {
+        $this->writeLog($method, $line, $message, 'debug');
+    }
+
+    /**
      * Writes info in log
      *
      * @param string $method
@@ -98,6 +111,19 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
      * @return void
      */
     public function writeInfo($method, $line, $message)
+    {
+        $this->writeLog($method, $line, $message, 'info');
+    }
+
+    /**
+     * Writes notice in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
+     */
+    public function writeNotice($method, $line, $message)
     {
         $this->writeLog($method, $line, $message, 'info');
     }
@@ -124,6 +150,32 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
      * @return void
      */
     public function writeError($method, $line, $message)
+    {
+        $this->writeLog($method, $line, $message, 'error');
+    }
+
+    /**
+     * Writes critical information in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
+     */
+    public function writeCritical($method, $line, $message)
+    {
+        $this->writeLog($method, $line, $message, 'error');
+    }
+
+    /**
+     * Writes alert information in log
+     *
+     * @param string $method
+     * @param string $line
+     * @param string $message
+     * @return void
+     */
+    public function writeAlert($method, $line, $message)
     {
         $this->writeLog($method, $line, $message, 'error');
     }

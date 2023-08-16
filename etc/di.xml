@@ -3,7 +3,12 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
     <!-- LOG Preference to use our logger (with IP, Line number, etc.) -->
-    <preference for="DanielNavarro\Logger\Model\LoggerInterface" type="DanielNavarro\Logger\Model\Logger"/>
+    <preference for="DanielNavarro\Logger\Model\LoggerInterface"
+                type="DanielNavarro\Logger\Model\Logger"/>
+
+    <!-- Send exceptions by email or telegram -->
+    <preference for="Magento\Framework\Logger\Handler\Exception"
+                type="DanielNavarro\Logger\Preference\Magento\Framework\Logger\Handler\Exception"/>
 
 </config>
 
