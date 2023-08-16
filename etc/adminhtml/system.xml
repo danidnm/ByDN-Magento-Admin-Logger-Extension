@@ -14,12 +14,30 @@
                     <label>Send exceptions by email</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="email" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification email</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
             </group>
             <group id="telegram" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Telegram notifications</label>
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Send exceptions by telegram</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="token" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Telegram API token</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="chat_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Telegram chat ID</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
                 </field>
             </group>
         </section>

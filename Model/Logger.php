@@ -7,9 +7,6 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     public const EMAIL_TEMPLATE = 'debug_email';
     public const XML_PATH_EMAIL_IDENTITY = 'contact/email/sender_email_identity';
 
-    public const TELEGRAM_TOKEN = '6089710117:AAHrKiMs2Y4alNCsB-TrjEp52x56g6WUQbo';
-    public const TELEGRAM_ID_GROUP = '-1001926424545';
-
     /**
      * @var \Magento\Framework\Translate\Inline\StateInterface
      */
@@ -51,12 +48,18 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     private $jsonSerializer;
 
     /**
+     * @var \DanielNavarro\Logger\Helper\Config
+     */
+    private $loggerConfig;
+
+    /**
      * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
      * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
      * @param \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress
      * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
+     * @param \DanielNavarro\Logger\Helper\Config $loggerConfig
      * @param string $name
      * @param array $handlers
      * @param array $processors
@@ -68,6 +71,7 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress,
         \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress,
         \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
+        \DanielNavarro\Logger\Helper\Config $loggerConfig,
         string $name = '',
         array $handlers = [],
         array $processors = []
@@ -78,6 +82,7 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         $this->remoteAddress = $remoteAddress;
         $this->serverAddress = $serverAddress;
         $this->jsonSerializer = $jsonSerializer;
+        $this->loggerConfig = $loggerConfig;
 
         $this->setIpAddresses();
 
@@ -126,19 +131,40 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     /**
      * Sends a telegram alert
      *
-     * @param string $destination
      * @param string $message
      * @return void
      */
-    public function sendAlertTelegram($destination, $message)
+    public function sendAlertTelegram($message)
     {
-        // Default destination if none
+        // Check if notification is enabled
+        if (!$this->loggerConfig->isTelegramNotificationEnabled()) {
+            return;
+        }
+
+        // Check API key exists or return
+        $apiKey = $this->loggerConfig->getTelegramToken();
+        if (empty($apiKey)) {
+            $this->writeError(
+                __METHOD__,
+                __LINE__,
+                'Trying to send telegram notification but API token not configured'
+            );
+            return;
+        }
+
+        // Check destination or return
+        $destination = $this->loggerConfig->getTelegramChatId();
         if (empty($destination)) {
-            $destination = self::TELEGRAM_ID_GROUP;
+            $this->writeError(
+                __METHOD__,
+                __LINE__,
+                'Trying to send telegram notification but chat ID not configured'
+            );
+            return;
         }
 
         // Build API URL
-        $apiUrl = 'https://api.telegram.org/bot' . self::TELEGRAM_TOKEN . '/sendMessage';
+        $apiUrl = 'https://api.telegram.org/bot' . $apiKey . '/sendMessage';
 
         try {
             // Send message
@@ -157,14 +183,29 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     /**
      * Sends an email alert
      *
-     * @param string $destination
      * @param string $subject
      * @param string $message
      * @return void
      */
-    public function sendAlertEmail($destination, $subject, $message)
+    public function sendAlertEmail($subject, $message)
     {
+        // Check if notification is enabled
+        if (!$this->loggerConfig->isEmailNotificationEnabled()) {
+            return;
+        }
 
+        // Check destination or return
+        $destination = $this->loggerConfig->getNotificationEmail();
+        if (empty($destination)) {
+            $this->writeError(
+                __METHOD__,
+                __LINE__,
+                'Trying to send email notification but destination not configured'
+            );
+            return;
+        }
+
+        // Get stack trace to append to the email
         $trace = (new \Exception())->getTraceAsString();
         $trace = nl2br($trace);
 
