@@ -53,6 +53,18 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     private $loggerConfig;
 
     /**
+     * Prevents recursive exception to telegram
+     * @var bool
+     */
+    private $nestedTelegramException = false;
+
+    /**
+     * Prevents recursive exception by email
+     * @var bool
+     */
+    private $nestedEmailException = false;
+
+    /**
      * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
      * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -194,6 +206,12 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
             return;
         }
 
+        // Check recursion
+        if ($this->nestedEmailException) {
+            return;
+        }
+        $this->nestedEmailException = true;
+
         // Check destination or return
         $destination = $this->loggerConfig->getNotificationEmail();
         if (empty($destination)) {
@@ -252,6 +270,12 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
             return;
         }
 
+        // Check recursion
+        if ($this->nestedTelegramException) {
+            return;
+        }
+        $this->nestedTelegramException = true;
+
         // Check API key exists or return
         $apiKey = $this->loggerConfig->getTelegramToken();
         if (empty($apiKey)) {
@@ -277,15 +301,38 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         // Build API URL
         $apiUrl = 'https://api.telegram.org/bot' . $apiKey . '/sendMessage';
 
+        // Chuks of 4096 maximum
+        $chunk = '';
+        $chunks = [];
+        $lines = explode("\n", $message);
+        $lines = array_slice($lines, 0, 10);
+        foreach ($lines as $line) {
+            $chunk = $chunk . $line;
+            if (strlen($chunk) > 1000) {
+                $chunks[] = $chunk;
+                $chunk = '';
+            }
+        }
+
         try {
-            // Send message
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $apiUrl);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id={$destination}&parse_mode=HTML&text=$message");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_exec($ch);
-            curl_close($ch);
+
+            // Send all messages
+            foreach ($chunks as $chunk) {
+
+                // Telegram limits to 4096 maximum
+                if (strlen($chunk) > 4000) {
+                    $chunk = substr($chunk, 0, 4000) . '..................';
+                }
+
+                // Send message
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $apiUrl);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id={$destination}&parse_mode=HTML&text=$chunk");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                curl_close($ch);
+            }
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
