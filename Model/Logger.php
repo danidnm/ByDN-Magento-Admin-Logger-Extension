@@ -129,58 +129,6 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     }
 
     /**
-     * Sends a telegram alert
-     *
-     * @param string $message
-     * @return void
-     */
-    public function sendAlertTelegram($message)
-    {
-        // Check if notification is enabled
-        if (!$this->loggerConfig->isTelegramNotificationEnabled()) {
-            return;
-        }
-
-        // Check API key exists or return
-        $apiKey = $this->loggerConfig->getTelegramToken();
-        if (empty($apiKey)) {
-            $this->writeError(
-                __METHOD__,
-                __LINE__,
-                'Trying to send telegram notification but API token not configured'
-            );
-            return;
-        }
-
-        // Check destination or return
-        $destination = $this->loggerConfig->getTelegramChatId();
-        if (empty($destination)) {
-            $this->writeError(
-                __METHOD__,
-                __LINE__,
-                'Trying to send telegram notification but chat ID not configured'
-            );
-            return;
-        }
-
-        // Build API URL
-        $apiUrl = 'https://api.telegram.org/bot' . $apiKey . '/sendMessage';
-
-        try {
-            // Send message
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $apiUrl);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id={$destination}&parse_mode=HTML&text=$message");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_exec($ch);
-            curl_close($ch);
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
-        }
-    }
-
-    /**
      * Sends an email alert
      *
      * @param string $subject
@@ -234,6 +182,58 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
+    }
+
+    /**
+     * Sends a telegram alert
+     *
+     * @param string $message
+     * @return void
+     */
+    public function sendAlertTelegram($message)
+    {
+        // Check if notification is enabled
+        if (!$this->loggerConfig->isTelegramNotificationEnabled()) {
+            return;
+        }
+
+        // Check API key exists or return
+        $apiKey = $this->loggerConfig->getTelegramToken();
+        if (empty($apiKey)) {
+            $this->writeError(
+                __METHOD__,
+                __LINE__,
+                'Trying to send telegram notification but API token not configured'
+            );
+            return;
+        }
+
+        // Check destination or return
+        $destination = $this->loggerConfig->getTelegramChatId();
+        if (empty($destination)) {
+            $this->writeError(
+                __METHOD__,
+                __LINE__,
+                'Trying to send telegram notification but chat ID not configured'
+            );
+            return;
+        }
+
+        // Build API URL
+        $apiUrl = 'https://api.telegram.org/bot' . $apiKey . '/sendMessage';
+
+        try {
+            // Send message
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $apiUrl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id={$destination}&parse_mode=HTML&text=$message");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_exec($ch);
+            curl_close($ch);
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
