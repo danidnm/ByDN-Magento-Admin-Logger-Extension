@@ -1,16 +1,16 @@
 <?php
 
-namespace DanielNavarro\Logger\Helper;
+namespace Bydn\Logger\Helper;
 
 class Config extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    private const LOGGER_EMAIL_NOTIFICATION_ENABLE = 'danielnavarro_logger/email/enable';
-    private const LOGGER_EMAIL_NOTIFICATION_EMAIL = 'danielnavarro_logger/email/email';
-    private const LOGGER_EMAIL_EXCEPTIONS = 'danielnavarro_logger/email/exceptions';
-    private const LOGGER_TELEGRAM_NOTIFICATION_ENABLE = 'danielnavarro_logger/telegram/enable';
-    private const LOGGER_TELEGRAM_NOTIFICATION_TOKEN = 'danielnavarro_logger/telegram/token';
-    private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'danielnavarro_logger/telegram/chat_id';
-    private const LOGGER_TELEGRAM_EXCEPTIONS = 'danielnavarro_logger/telegram/exceptions';
+    private const LOGGER_EMAIL_NOTIFICATION_ENABLE = 'bydn_logger/email/enable';
+    private const LOGGER_EMAIL_NOTIFICATION_EMAIL = 'bydn_logger/email/email';
+    private const LOGGER_EMAIL_EXCEPTIONS = 'bydn_logger/email/exceptions';
+    private const LOGGER_TELEGRAM_NOTIFICATION_ENABLE = 'bydn_logger/telegram/enable';
+    private const LOGGER_TELEGRAM_NOTIFICATION_TOKEN = 'bydn_logger/telegram/token';
+    private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'bydn_logger/telegram/chat_id';
+    private const LOGGER_TELEGRAM_EXCEPTIONS = 'bydn_logger/telegram/exceptions';
 
     /**
      * Check if email notification is enabled
