@@ -1,6 +1,6 @@
 <?php
 
-namespace DanielNavarro\Logger\Model;
+namespace Bydn\Logger\Model;
 
 /**
  * Interface LoggerInterface

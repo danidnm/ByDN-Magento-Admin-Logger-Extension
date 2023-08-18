@@ -1,8 +1,7 @@
 <?php
 
-namespace DanielNavarro\Logger\Model;
-
-class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\LoggerInterface
+namespace Bydn\Logger\Model;
+class Logger extends \Monolog\Logger implements \Bydn\Logger\Model\LoggerInterface
 {
     public const EMAIL_TEMPLATE = 'debug_email';
     public const XML_PATH_EMAIL_IDENTITY = 'contact/email/sender_email_identity';
@@ -48,7 +47,7 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
     private $jsonSerializer;
 
     /**
-     * @var \DanielNavarro\Logger\Helper\Config
+     * @var \Bydn\Logger\Helper\Config
      */
     private $loggerConfig;
 
@@ -71,7 +70,7 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
      * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
      * @param \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress
      * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
-     * @param \DanielNavarro\Logger\Helper\Config $loggerConfig
+     * @param \Bydn\Logger\Helper\Config $loggerConfig
      * @param string $name
      * @param array $handlers
      * @param array $processors
@@ -83,7 +82,7 @@ class Logger extends \Monolog\Logger implements \DanielNavarro\Logger\Model\Logg
         \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress,
         \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress,
         \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
-        \DanielNavarro\Logger\Helper\Config $loggerConfig,
+        \Bydn\Logger\Helper\Config $loggerConfig,
         string $name = '',
         array $handlers = [],
         array $processors = []

@@ -1,16 +1,16 @@
 <?php
 
-namespace DanielNavarro\Logger\Preference\Magento\Framework\Logger\Handler;
+namespace Bydn\Logger\Preference\Magento\Framework\Logger\Handler;
 
 class Exception extends \Magento\Framework\Logger\Handler\Exception
 {
     /**
-     * @var \DanielNavarro\Logger\Helper\Config
+     * @var \Bydn\Logger\Helper\Config
      */
     private $alertsConfig;
 
     /**
-     * @var \DanielNavarro\Logger\Model\Logger
+     * @var \Bydn\Logger\Model\Logger
      */
     private $alertsLogger;
 
@@ -21,8 +21,8 @@ class Exception extends \Magento\Framework\Logger\Handler\Exception
      */
     public function __construct(
         \Magento\Framework\Filesystem\DriverInterface $filesystem,
-        \DanielNavarro\Logger\Helper\Config $alertsConfig,
-        \DanielNavarro\Logger\Model\Logger $alertsLogger,
+        \Bydn\Logger\Helper\Config $alertsConfig,
+        \Bydn\Logger\Model\Logger $alertsLogger,
         ?string $filePath = null,
         ?string $fileName = null
     ) {
