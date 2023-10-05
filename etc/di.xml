@@ -2,13 +2,54 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <!-- LOG Preference to use our logger (with IP, Line number, etc.) -->
-    <preference for="Bydn\Logger\Model\LoggerInterface"
-                type="Bydn\Logger\Model\Logger"/>
+    <!-- CRUD model for log entries -->
+    <preference for="Bydn\Logger\Api\AdminLogRepositoryInterface" type="Bydn\Logger\Model\AdminLogRepository" />
+    <preference for="Bydn\Logger\Api\Data\AdminLogSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Bydn\Logger\Api\Data\AdminLogInterface" type="Bydn\Logger\Model\AdminLog" />
+
+    <!-- LOG Preference to add IP, line number, etc.) -->
+    <preference for="Bydn\Logger\Model\LoggerInterface" type="Bydn\Logger\Model\Logger"/>
 
     <!-- Send exceptions by email or telegram -->
     <preference for="Magento\Framework\Logger\Handler\Exception"
                 type="Bydn\Logger\Preference\Magento\Framework\Logger\Handler\Exception"/>
+
+    <!-- Report listing data provider -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="logger_report_listing_data_source" xsi:type="string">Bydn\Logger\Model\ResourceModel\AdminLog\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- LOG bydn_core (definition) -->
+    <virtualType name="Bydn\Logger\Model\CoreHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+            <argument name="fileName" xsi:type="string">/var/log/bydn_core.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Bydn\Logger\Model\CoreLogger" type="Bydn\Logger\Model\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">bydn_core_logger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Bydn\Logger\Model\CoreHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- LOG bydn_core (usages) -->
+    <type name="Bydn\Logger\Observer\Predispatch">
+        <arguments>
+            <argument name="logger" xsi:type="object">Bydn\Logger\Model\CoreLogger</argument>
+        </arguments>
+    </type>
+    <type name="Bydn\Logger\Cron\CleanHistory">
+        <arguments>
+            <argument name="logger" xsi:type="object">Bydn\Logger\Model\CoreLogger</argument>
+        </arguments>
+    </type>
 
 </config>
 

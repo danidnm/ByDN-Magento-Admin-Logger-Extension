@@ -11,6 +11,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     private const LOGGER_TELEGRAM_NOTIFICATION_TOKEN = 'bydn_logger/telegram/token';
     private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'bydn_logger/telegram/chat_id';
     private const LOGGER_TELEGRAM_EXCEPTIONS = 'bydn_logger/telegram/exceptions';
+    private const LOGGER_ADMIN_LOGGER_ENABLE = 'bydn_admin_logger/general/enable';
 
     /**
      * Check if email notification is enabled
@@ -112,6 +113,21 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(
             self::LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Returns if admin logger is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isAdminLoggerEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_ADMIN_LOGGER_ENABLE,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $storeId
         );

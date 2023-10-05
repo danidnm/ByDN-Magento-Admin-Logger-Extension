@@ -212,8 +212,8 @@ class Logger extends \Monolog\Logger implements \Bydn\Logger\Model\LoggerInterfa
         $this->nestedEmailException = true;
 
         // Check destination or return
-        $destination = $this->loggerConfig->getNotificationEmail();
-        if (empty($destination)) {
+        $destinations = $this->loggerConfig->getNotificationEmail();
+        if (empty($destinations)) {
             $this->writeError(
                 __METHOD__,
                 __LINE__,
@@ -221,14 +221,17 @@ class Logger extends \Monolog\Logger implements \Bydn\Logger\Model\LoggerInterfa
             );
             return;
         }
+        $destinations = explode(',', $destinations);
+        $destinations = array_map('trim', $destinations);
+        $destinations = array_filter($destinations);
 
-        // Get stack trace to append to the email
+            // Get stack trace to append to the email
         $trace = (new \Exception())->getTraceAsString();
         $trace = nl2br($trace);
 
         try {
             $this->inlineTranslation->suspend();
-            $transport = $this->transportBuilder
+            $this->transportBuilder
                 ->setTemplateIdentifier(self::EMAIL_TEMPLATE)
                 ->setTemplateOptions(
                     [
@@ -246,12 +249,21 @@ class Logger extends \Monolog\Logger implements \Bydn\Logger\Model\LoggerInterfa
                         self::XML_PATH_EMAIL_IDENTITY,
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE
                     )
-                )
-                ->addTo($destination)
-                ->getTransport();
+                );
+
+            // Add destinations
+            foreach ($destinations as $destination) {
+                $this->transportBuilder->addTo($destinations);
+
+            }
+
+            // Get transport and send
+            $transport = $this->transportBuilder->getTransport();
             $transport->sendMessage();
+
             $this->inlineTranslation->resume();
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
@@ -304,14 +316,14 @@ class Logger extends \Monolog\Logger implements \Bydn\Logger\Model\LoggerInterfa
         $chunk = '';
         $chunks = [];
         $lines = explode("\n", $message);
-        $lines = array_slice($lines, 0, 10);
         foreach ($lines as $line) {
             $chunk = $chunk . $line;
-            if (strlen($chunk) > 1000) {
+            if ((strlen($chunk) > 1000) || ($line == end($lines))) {
                 $chunks[] = $chunk;
                 $chunk = '';
             }
         }
+        $chunks = array_slice($chunks, 0, 3); // Max 3 x 1000 characters is enough text to read
 
         try {
 

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <!-- Reports -->
+        <add id="Magento_Reports::report_logger" title="Admin Log" translate="title" module="Magento_Backend" sortOrder="991" parent="Magento_Reports::report" resource="Bydn_Logger::report_logger"/>
+        <add id="Bydn_Logger::report_logger_report" title="See logs" module="Bydn_Logger" sortOrder="35" resource="Bydn_Logger::report_logger_report" parent="Magento_Reports::report_logger" action="bydnlogger/logger/report" />
+
+    </menu>
+</config>

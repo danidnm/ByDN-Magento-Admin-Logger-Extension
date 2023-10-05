@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="bydn_admin_log">
+        <column xsi:type="int" name="id" nullable="false" identity="true" padding="10" unsigned="true"
+                comment="Log Id"/>
+        <column xsi:type="int" name="user_id" nullable="true" padding="10" comment="Action User Id"/>
+        <column xsi:type="varchar" name="user_name" nullable="true" length="200" comment="User Name"/>
+        <column xsi:type="varchar" name="user_mail" nullable="true" length="200" comment="User Mail"/>
+        <column xsi:type="varchar" name="user_ip" nullable="true" length="30" comment="User Ip"/>
+        <column xsi:type="varchar" name="controller_module" nullable="false" length="100" comment="Controller Module Name"/>
+        <column xsi:type="varchar" name="controller_name" nullable="false" length="200" comment="Controller Name"/>
+        <column xsi:type="varchar" name="action_name" nullable="false" length="200" comment="Action Name"/>
+        <column xsi:type="text" name="params" nullable="true" comment="Params"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Create date"/>
+        <index referenceId="BYDN_ADMIN_LOGGER_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+    </table>
+</schema>
