@@ -9,11 +9,11 @@ use Bydn\Logger\Api\Data\AdminLogSearchResultsInterface;
 use Bydn\Logger\Api\Data\AdminLogSearchResultsInterfaceFactory;
 use Bydn\Logger\Model\ResourceModel\AdminLog as AdminLogResource;
 use Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory as AdminLogCollectionFactory;
-use Bydn\Logger\Model\LoggerInterface as Logger;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
+use Psr\Log\LoggerInterface as Logger;
 
 /**
  * Admin log repository
@@ -63,8 +63,8 @@ class AdminLogRepository implements AdminLogRepositoryInterface
         AdminLogInterfaceFactory              $adminLogInterfaceFactory,
         AdminLogCollectionFactory             $collectionFactory,
         AdminLogSearchResultsInterfaceFactory $searchResultsFactory,
-        CollectionProcessorInterface             $collectionProcessor,
-        Logger                                   $logger
+        CollectionProcessorInterface          $collectionProcessor,
+        Logger                                $logger
     ) {
         $this->resource = $resource;
         $this->adminLogFactory = $adminLogFactory;

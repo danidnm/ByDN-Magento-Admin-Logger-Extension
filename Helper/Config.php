@@ -4,6 +4,11 @@ namespace Bydn\Logger\Helper;
 
 class Config extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    private const LOGGER_EXTRAINFO_ENABLE = 'bydn_logger/log_files/enable';
+    private const LOGGER_EXTRAINFO_IP = 'bydn_logger/log_files/ip_addresses';
+    private const LOGGER_EXTRAINFO_CONTROLLER = 'bydn_logger/log_files/controller_info';
+    private const LOGGER_EXTRAINFO_URL = 'bydn_logger/log_files/browser_url';
+    private const LOGGER_EXTRAINFO_TRACE = 'bydn_logger/log_files/trace_info';
     private const LOGGER_EMAIL_NOTIFICATION_ENABLE = 'bydn_logger/email/enable';
     private const LOGGER_EMAIL_NOTIFICATION_EMAIL = 'bydn_logger/email/email';
     private const LOGGER_EMAIL_EXCEPTIONS = 'bydn_logger/email/exceptions';
@@ -12,6 +17,81 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'bydn_logger/telegram/chat_id';
     private const LOGGER_TELEGRAM_EXCEPTIONS = 'bydn_logger/telegram/exceptions';
     private const LOGGER_ADMIN_LOGGER_ENABLE = 'bydn_admin_logger/general/enable';
+
+    /**
+     * Check if extra info in logs is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isExtrainfoEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_EXTRAINFO_ENABLE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Check if extra info in logs is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isExtrainfoIpEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_EXTRAINFO_IP,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Check if extra info in logs is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isExtrainfoControllerEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_EXTRAINFO_CONTROLLER,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Check if extra info in logs is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isExtrainfoUrlEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_EXTRAINFO_URL,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Check if extra info in logs is enabled
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function isExtrainfoTraceEnabled($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_EXTRAINFO_TRACE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
 
     /**
      * Check if email notification is enabled
