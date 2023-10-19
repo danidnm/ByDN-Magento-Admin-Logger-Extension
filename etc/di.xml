@@ -11,7 +11,16 @@
     <type name="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="bydn_extra_info" xsi:type="object">Bydn\Logger\Processor\Extrainfo</item>
+                <item name="bydn_logger_extra_info" xsi:type="object">Bydn\Logger\Processor\Extrainfo</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Log handler to send alerts -->
+    <type name="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers"  xsi:type="array">
+                <item name="bydn_logger_notification_alerts" xsi:type="object">Bydn\Logger\Handler\Notification</item>
             </argument>
         </arguments>
     </type>
