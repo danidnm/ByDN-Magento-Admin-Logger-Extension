@@ -37,7 +37,7 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
     private \Bydn\Logger\Model\AdminLogFactory $adminLogFactory;
 
     /**
-     * @var \Bydn\Logger\Model\LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
@@ -52,7 +52,7 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
      * @param \Bydn\Logger\Model\ResourceModel\AdminLog $adminLogResource
      * @param \Bydn\Logger\Model\AdminLogFactory $adminLogFactory
      * @param \Bydn\Logger\Helper\Config $loggerConfig
-     * @param \Bydn\Logger\Model\LoggerInterface $logger
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         \Magento\Backend\Model\Auth\Session $authSession,
@@ -60,7 +60,7 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
         \Bydn\Logger\Model\ResourceModel\AdminLog $adminLogResource,
         \Bydn\Logger\Model\AdminLogFactory $adminLogFactory,
         \Bydn\Logger\Helper\Config $loggerConfig,
-        \Bydn\Logger\Model\LoggerInterface $logger
+        \Psr\Log\LoggerInterface $logger
     )
     {
         $this->authSession = $authSession;
@@ -89,10 +89,10 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
         $adminLog = $this->adminLogFactory->create();
 
         // Controller data
-        $adminLog->setControllerModule($this->request->getControllerModule());
-        $adminLog->setControllerName($this->request->getControllerName());
-        $adminLog->setActionName($this->request->getActionName());
-        $adminLog->setUserIp($this->request->getClientIp());
+        $adminLog->setControllerModule($this->request->getControllerModule() ?: '');
+        $adminLog->setControllerName($this->request->getControllerName() ?: '');
+        $adminLog->setActionName($this->request->getActionName() ?: '');
+        $adminLog->setUserIp($this->request->getClientIp() ?: '');
 
         // Skip Magento_Ui
         if ($adminLog->getControllerModule() == 'Magento_Ui') {
