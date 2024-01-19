@@ -37,6 +37,7 @@ class CleanHistory
 
     /**
      * CleanHistory constructor.
+     *
      * @param \Magento\Framework\App\ResourceConnection $resource
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
      * @param \Bydn\Logger\Helper\Config $config
@@ -47,14 +48,18 @@ class CleanHistory
         \Magento\Framework\Stdlib\DateTime\DateTime $dateTime,
         \Bydn\Logger\Helper\Config $config,
         \Psr\Log\LoggerInterface $logger
-    )
-    {
+    ) {
         $this->resource = $resource;
         $this->dateTime = $dateTime;
         $this->config = $config;
         $this->logger = $logger;
     }
 
+    /**
+     * Clean entries from database
+     *
+     * @return void
+     */
     public function clean()
     {
         // Keep 15 days
@@ -64,8 +69,9 @@ class CleanHistory
 
         // Delete from DB
         $this->connection = $this->resource->getConnection();
+        $tableName = $this->connection->getTableName('bydn_admin_log');
         $this->connection->query(
-            'DELETE FROM bydn_admin_log WHERE created_at < "' . $date . '"'
+            'DELETE FROM ' . $tableName . ' WHERE created_at < "' . $date . '"'
         );
     }
 }

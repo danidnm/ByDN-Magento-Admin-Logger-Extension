@@ -1,5 +1,9 @@
 <!--@subject {{trans "%subject" subject=$subject}} @-->
-
+<!--@vars {
+"var subject":"Subject line",
+"var message|raw":"Log message to be emailed",
+"var trace|raw":"Stack trace of the log entry"
+} @-->
 {{template config_path="design/email/header_template"}}
 
 <tr>

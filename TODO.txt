@@ -1,1 +1,3 @@
-Make log alerts level configurable
+Make log alerts level configurable (email and telegram)
+Implement a monolog viewer with all the data
+

@@ -8,6 +8,8 @@ use Magento\Framework\Model\AbstractExtensibleModel;
 class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
 {
     /**
+     * Class constructor
+     *
      * @return void
      */
     protected function _construct()
@@ -17,6 +19,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the entity ID
+     *
      * @return null|int
      */
     public function getId(): ?int
@@ -25,6 +29,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the User ID
+     *
      * @return null|int
      */
     public function getUserId(): ?int
@@ -33,6 +39,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the User Email
+     *
      * @return string|null
      */
     public function getUserEmail(): ?string
@@ -41,6 +49,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the User Name
+     *
      * @return string|null
      */
     public function getUserName(): ?string
@@ -49,6 +59,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the User IP
+     *
      * @return string|null
      */
     public function getUserIp(): ?string
@@ -57,6 +69,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the Module Name
+     *
      * @return string|null
      */
     public function getControllerModule(): ?string
@@ -65,6 +79,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the Controller Name
+     *
      * @return string|null
      */
     public function getControllerName(): ?string
@@ -73,6 +89,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the Action Name
+     *
      * @return string|null
      */
     public function getActionName(): ?string
@@ -81,6 +99,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the Request Parameters
+     *
      * @return string|null
      */
     public function getParams(): ?string
@@ -89,6 +109,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Returns the Creation date
+     *
      * @return string|null
      */
     public function getCreatedAt(): ?string
@@ -97,6 +119,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the User Id
+     *
      * @param int $userId
      * @return AdminLogInterface
      */
@@ -106,6 +130,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the User Email
+     *
      * @param string $userEmail
      * @return AdminLogInterface
      */
@@ -115,6 +141,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the User Name
+     *
      * @param string $userName
      * @return AdminLogInterface
      */
@@ -124,6 +152,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the User IP
+     *
      * @param string $userIp
      * @return AdminLogInterface
      */
@@ -133,6 +163,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the Module Name
+     *
      * @param string $controllerModule
      * @return AdminLogInterface
      */
@@ -142,6 +174,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the Controller Name
+     *
      * @param string $controllerName
      * @return AdminLogInterface
      */
@@ -151,6 +185,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the Action Name
+     *
      * @param string $actionName
      * @return AdminLogInterface
      */
@@ -160,6 +196,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the Request Parameters
+     *
      * @param string $params
      * @return AdminLogInterface
      */
@@ -169,6 +207,8 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
     }
 
     /**
+     * Sets the Creation Date
+     *
      * @param string $createdAt
      * @return AdminLogInterface
      */
