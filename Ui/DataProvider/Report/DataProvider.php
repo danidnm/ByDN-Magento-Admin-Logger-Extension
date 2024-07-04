@@ -5,6 +5,11 @@ namespace Bydn\Logger\Ui\DataProvider\Report;
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
+     * @var \Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory
+     */
+    private $collectionFactory;
+
+    /**
      * @param \Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory $collectionFactory
      * @param string $name
      * @param string $primaryFieldName
