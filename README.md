@@ -4,6 +4,10 @@ This administrator-focused extension introduces an admin logger, enabling Magent
 
 ## Features
 
+- Logs any admistrator action performed in the Magento Backoffice to keep track of who changed what.
+- Allows filtering request based on Module Name, Controller, Action and Administrator User to allow focussing on what is really important.
+- Automatic Log entries clean up to avoid excessive growth of the logger tables.
+
 # Configuration
 
 Access the configuration going to:
