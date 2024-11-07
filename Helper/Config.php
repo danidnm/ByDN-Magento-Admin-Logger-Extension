@@ -1,21 +1,21 @@
 <?php
 
-namespace Bydn\Logger\Helper;
+namespace Bydn\AdminLogger\Helper;
 
 class Config extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    private const LOGGER_EXTRAINFO_ENABLE = 'bydn_logger/log_files/enable';
-    private const LOGGER_EXTRAINFO_IP = 'bydn_logger/log_files/ip_addresses';
-    private const LOGGER_EXTRAINFO_CONTROLLER = 'bydn_logger/log_files/controller_info';
-    private const LOGGER_EXTRAINFO_URL = 'bydn_logger/log_files/browser_url';
-    private const LOGGER_EXTRAINFO_TRACE = 'bydn_logger/log_files/trace_info';
-    private const LOGGER_EMAIL_NOTIFICATION_ENABLE = 'bydn_logger/email/enable';
-    private const LOGGER_EMAIL_NOTIFICATION_EMAIL = 'bydn_logger/email/email';
-    private const LOGGER_EMAIL_EXCEPTIONS = 'bydn_logger/email/exceptions';
-    private const LOGGER_TELEGRAM_NOTIFICATION_ENABLE = 'bydn_logger/telegram/enable';
-    private const LOGGER_TELEGRAM_NOTIFICATION_TOKEN = 'bydn_logger/telegram/token';
-    private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'bydn_logger/telegram/chat_id';
-    private const LOGGER_TELEGRAM_EXCEPTIONS = 'bydn_logger/telegram/exceptions';
+    private const LOGGER_EXTRAINFO_ENABLE = 'bydn_admin_logger/log_files/enable';
+    private const LOGGER_EXTRAINFO_IP = 'bydn_admin_logger/log_files/ip_addresses';
+    private const LOGGER_EXTRAINFO_CONTROLLER = 'bydn_admin_logger/log_files/controller_info';
+    private const LOGGER_EXTRAINFO_URL = 'bydn_admin_logger/log_files/browser_url';
+    private const LOGGER_EXTRAINFO_TRACE = 'bydn_admin_logger/log_files/trace_info';
+    private const LOGGER_EMAIL_NOTIFICATION_ENABLE = 'bydn_admin_logger/email/enable';
+    private const LOGGER_EMAIL_NOTIFICATION_EMAIL = 'bydn_admin_logger/email/email';
+    private const LOGGER_EMAIL_EXCEPTIONS = 'bydn_admin_logger/email/exceptions';
+    private const LOGGER_TELEGRAM_NOTIFICATION_ENABLE = 'bydn_admin_logger/telegram/enable';
+    private const LOGGER_TELEGRAM_NOTIFICATION_TOKEN = 'bydn_admin_logger/telegram/token';
+    private const LOGGER_TELEGRAM_NOTIFICATION_CHAT_ID = 'bydn_admin_logger/telegram/chat_id';
+    private const LOGGER_TELEGRAM_EXCEPTIONS = 'bydn_admin_logger/telegram/exceptions';
     private const LOGGER_ADMIN_LOGGER_ENABLE = 'bydn_admin_logger/general/enable';
 
     /**

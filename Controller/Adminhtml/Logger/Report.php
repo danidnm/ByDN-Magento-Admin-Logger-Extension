@@ -1,6 +1,6 @@
 <?php
 
-namespace Bydn\Logger\Controller\Adminhtml\Logger;
+namespace Bydn\AdminLogger\Controller\Adminhtml\Logger;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\View\Result\Page;
@@ -10,8 +10,8 @@ use Magento\Framework\View\Result\Page;
  */
 class Report extends Action
 {
-    const MENU_ID = 'Bydn_Logger::report_logger_report';
-    const ADMIN_RESOURCE = 'Bydn_Logger::report_logger_report';
+    const MENU_ID = 'Bydn_AdminLogger::report_logger_report';
+    const ADMIN_RESOURCE = 'Bydn_AdminLogger::report_logger_report';
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory

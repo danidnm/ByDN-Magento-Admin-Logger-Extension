@@ -1,8 +1,8 @@
 <?php
 
-namespace Bydn\Logger\Observer;
+namespace Bydn\AdminLogger\Observer;
 
-use Bydn\Logger\Api\Data\AdminLogInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogInterface;
 
 class Predispatch implements \Magento\Framework\Event\ObserverInterface
 {
@@ -22,19 +22,19 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
     private $jsonSerializer;
 
     /**
-     * @var \Bydn\Logger\Helper\Config
+     * @var \Bydn\AdminLogger\Helper\Config
      */
     private $loggerConfig;
 
     /**
-     * @var \Bydn\Logger\Model\ResourceModel\AdminLog
+     * @var \Bydn\AdminLogger\Model\ResourceModel\AdminLog
      */
     private $adminLogResource;
 
     /**
-     * @var \Bydn\Logger\Model\AdminLogFactory
+     * @var \Bydn\AdminLogger\Model\AdminLogFactory
      */
-    private \Bydn\Logger\Model\AdminLogFactory $adminLogFactory;
+    private \Bydn\AdminLogger\Model\AdminLogFactory $adminLogFactory;
 
     /**
      * @var \Psr\Log\LoggerInterface
@@ -49,17 +49,17 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
     /**
      * @param \Magento\Backend\Model\Auth\Session $authSession
      * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
-     * @param \Bydn\Logger\Model\ResourceModel\AdminLog $adminLogResource
-     * @param \Bydn\Logger\Model\AdminLogFactory $adminLogFactory
-     * @param \Bydn\Logger\Helper\Config $loggerConfig
+     * @param \Bydn\AdminLogger\Model\ResourceModel\AdminLog $adminLogResource
+     * @param \Bydn\AdminLogger\Model\AdminLogFactory $adminLogFactory
+     * @param \Bydn\AdminLogger\Helper\Config $loggerConfig
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         \Magento\Backend\Model\Auth\Session $authSession,
         \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
-        \Bydn\Logger\Model\ResourceModel\AdminLog $adminLogResource,
-        \Bydn\Logger\Model\AdminLogFactory $adminLogFactory,
-        \Bydn\Logger\Helper\Config $loggerConfig,
+        \Bydn\AdminLogger\Model\ResourceModel\AdminLog $adminLogResource,
+        \Bydn\AdminLogger\Model\AdminLogFactory $adminLogFactory,
+        \Bydn\AdminLogger\Helper\Config $loggerConfig,
         \Psr\Log\LoggerInterface $logger
     )
     {

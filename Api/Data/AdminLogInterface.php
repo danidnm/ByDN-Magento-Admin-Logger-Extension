@@ -1,6 +1,6 @@
 <?php
 
-namespace Bydn\Logger\Api\Data;
+namespace Bydn\AdminLogger\Api\Data;
 
 /**
  * Interface AdminLogInterface

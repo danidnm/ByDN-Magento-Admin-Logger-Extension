@@ -1,8 +1,8 @@
 <?php
 
-namespace Bydn\Logger\Cron;
+namespace Bydn\AdminLogger\Cron;
 
-use Bydn\Logger\Api\Data\AdminLogInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogInterface;
 
 /**
  * TODO:
@@ -21,7 +21,7 @@ class CleanHistory
     private $dateTime;
 
     /**
-     * @var \Bydn\Logger\Helper\Config
+     * @var \Bydn\AdminLogger\Helper\Config
      */
     private $config;
 
@@ -40,13 +40,13 @@ class CleanHistory
      *
      * @param \Magento\Framework\App\ResourceConnection $resource
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
-     * @param \Bydn\Logger\Helper\Config $config
+     * @param \Bydn\AdminLogger\Helper\Config $config
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
         \Magento\Framework\Stdlib\DateTime\DateTime $dateTime,
-        \Bydn\Logger\Helper\Config $config,
+        \Bydn\AdminLogger\Helper\Config $config,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->resource = $resource;

@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xml" >
     <router id="admin">
         <route id="bydnlogger" frontName="bydnlogger">
-            <module name="Bydn_Logger" />
+            <module name="Bydn_AdminLogger" />
         </route>
     </router>
 </config>

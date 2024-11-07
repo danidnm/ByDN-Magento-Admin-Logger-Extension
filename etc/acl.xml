@@ -4,7 +4,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Reports::report">
-                    <resource id="Bydn_Logger::report_logger" title="Admin Logger" sortOrder="10">
+                    <resource id="Bydn_AdminLogger::report_logger" title="Admin Logger" sortOrder="10">
                         <resource id="Bydn_Prices::report" title="Admin logs" sortOrder="10" />
                     </resource>
                 </resource>

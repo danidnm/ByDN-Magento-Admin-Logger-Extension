@@ -1,8 +1,8 @@
 <?php
 
-namespace Bydn\Logger\Model;
+namespace Bydn\AdminLogger\Model;
 
-use Bydn\Logger\Api\Data\AdminLogInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogInterface;
 use Magento\Framework\Model\AbstractExtensibleModel;
 
 class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
@@ -14,7 +14,7 @@ class AdminLog extends AbstractExtensibleModel implements AdminLogInterface
      */
     protected function _construct()
     {
-        $this->_init(\Bydn\Logger\Model\ResourceModel\AdminLog::class);
+        $this->_init(\Bydn\AdminLogger\Model\ResourceModel\AdminLog::class);
         $this->setIdFieldName('id');
     }
 

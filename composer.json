@@ -1,11 +1,11 @@
 {
-    "name": "bydn/logger",
-    "description": "Logger Improved",
+    "name": "bydn/admin-logger",
+    "description": "Admin Logger",
     "require": {
         "php": ">=8.1"
     },
     "type": "magento2-module",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "license": [
         "Commercial"
     ],
@@ -14,7 +14,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Bydn\\Logger\\": ""
+            "Bydn\\AdminLogger\\": ""
         }
     }
 }

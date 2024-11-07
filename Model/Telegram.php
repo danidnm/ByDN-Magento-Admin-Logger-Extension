@@ -1,19 +1,19 @@
 <?php
 
-namespace Bydn\Logger\Model;
+namespace Bydn\AdminLogger\Model;
 
 class Telegram
 {
     /**
-     * @var \Bydn\Logger\Helper\Config
+     * @var \Bydn\AdminLogger\Helper\Config
      */
     private $loggerConfig;
 
     /**
-     * @param \Bydn\Logger\Helper\Config $loggerConfig
+     * @param \Bydn\AdminLogger\Helper\Config $loggerConfig
      */
     public function __construct(
-        \Bydn\Logger\Helper\Config $loggerConfig
+        \Bydn\AdminLogger\Helper\Config $loggerConfig
     ) {
         $this->loggerConfig = $loggerConfig;
     }

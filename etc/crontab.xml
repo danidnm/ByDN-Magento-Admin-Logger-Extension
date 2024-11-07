@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-    <group id="bydn_logger">
-        <job name="bydn_remove_old_admin_logs" instance="Bydn\Logger\Cron\CleanHistory" method="clean">
+    <group id="bydn_admin_logger">
+        <job name="bydn_remove_old_admin_logs" instance="Bydn\AdminLogger\Cron\CleanHistory" method="clean">
             <schedule>15 1 * * *</schedule>
         </job>
     </group>

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bydn\Logger\Processor;
+namespace Bydn\AdminLogger\Processor;
 
-use Bydn\Logger\Helper\Config;
+use Bydn\AdminLogger\Helper\Config;
 
 class Extrainfo
 {
@@ -37,7 +37,7 @@ class Extrainfo
      * @param \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress
      */
     public function __construct(
-        \Bydn\Logger\Helper\Config $loggerConfig,
+        \Bydn\AdminLogger\Helper\Config $loggerConfig,
         \Magento\Framework\App\Request\Http $request,
         \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress,
         \Magento\Framework\HTTP\PhpEnvironment\ServerAddress $serverAddress,

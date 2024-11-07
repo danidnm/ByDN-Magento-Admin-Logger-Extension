@@ -1,8 +1,8 @@
 <?php
 
-namespace Bydn\Logger\Api\Data;
+namespace Bydn\AdminLogger\Api\Data;
 
-use Bydn\Logger\Api\Data\AdminLogInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 
 interface AdminLogSearchResultsInterface extends SearchResultsInterface

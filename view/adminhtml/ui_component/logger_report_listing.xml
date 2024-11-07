@@ -9,7 +9,7 @@
     </argument>
     <dataSource name="logger_report_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Bydn\Logger\Ui\DataProvider\Report\DataProvider</argument>
+            <argument name="class" xsi:type="string">Bydn\AdminLogger\Ui\DataProvider\Report\DataProvider</argument>
             <argument name="name" xsi:type="string">logger_report_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>

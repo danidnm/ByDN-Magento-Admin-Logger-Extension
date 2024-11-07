@@ -1,14 +1,14 @@
 <?php
 
-namespace Bydn\Logger\Model;
+namespace Bydn\AdminLogger\Model;
 
-use Bydn\Logger\Api\AdminLogRepositoryInterface;
-use Bydn\Logger\Api\Data\AdminLogInterface;
-use Bydn\Logger\Api\Data\AdminLogInterfaceFactory;
-use Bydn\Logger\Api\Data\AdminLogSearchResultsInterface;
-use Bydn\Logger\Api\Data\AdminLogSearchResultsInterfaceFactory;
-use Bydn\Logger\Model\ResourceModel\AdminLog as AdminLogResource;
-use Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory as AdminLogCollectionFactory;
+use Bydn\AdminLogger\Api\AdminLogRepositoryInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogInterfaceFactory;
+use Bydn\AdminLogger\Api\Data\AdminLogSearchResultsInterface;
+use Bydn\AdminLogger\Api\Data\AdminLogSearchResultsInterfaceFactory;
+use Bydn\AdminLogger\Model\ResourceModel\AdminLog as AdminLogResource;
+use Bydn\AdminLogger\Model\ResourceModel\AdminLog\CollectionFactory as AdminLogCollectionFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -79,7 +79,7 @@ class AdminLogRepository implements AdminLogRepositoryInterface
      * Retrieve entity.
      *
      * @param int $id
-     * @return \Bydn\Logger\Api\Data\AdminLogInterface
+     * @return \Bydn\AdminLogger\Api\Data\AdminLogInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function get($id)
@@ -96,7 +96,7 @@ class AdminLogRepository implements AdminLogRepositoryInterface
      * Retrieve log entry matching the specified criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
-     * @return \Bydn\Logger\Api\Data\AdminLogSearchResultsInterface
+     * @return \Bydn\AdminLogger\Api\Data\AdminLogSearchResultsInterface
      * @throws LocalizedException
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
@@ -114,8 +114,8 @@ class AdminLogRepository implements AdminLogRepositoryInterface
     /**
      * Save log entry
      *
-     * @param \Bydn\Logger\Api\Data\AdminLogInterface $adminLog
-     * @return \Bydn\Logger\Api\Data\AdminLogInterface
+     * @param \Bydn\AdminLogger\Api\Data\AdminLogInterface $adminLog
+     * @return \Bydn\AdminLogger\Api\Data\AdminLogInterface
      * @throws LocalizedException
      */
     public function save(AdminLogInterface $adminLog): AdminLogInterface

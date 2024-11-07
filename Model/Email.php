@@ -1,6 +1,6 @@
 <?php
 
-namespace Bydn\Logger\Model;
+namespace Bydn\AdminLogger\Model;
 class Email
 {
     public const EMAIL_TEMPLATE = 'debug_email';
@@ -22,7 +22,7 @@ class Email
     private $scopeConfig;
 
     /**
-     * @var \Bydn\Logger\Helper\Config
+     * @var \Bydn\AdminLogger\Helper\Config
      */
     private $loggerConfig;
 
@@ -36,13 +36,13 @@ class Email
      * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
      * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Bydn\Logger\Helper\Config $loggerConfig
+     * @param \Bydn\AdminLogger\Helper\Config $loggerConfig
      */
     public function __construct(
         \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
         \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Bydn\Logger\Helper\Config $loggerConfig
+        \Bydn\AdminLogger\Helper\Config $loggerConfig
     ) {
         $this->inlineTranslation = $inlineTranslation;
         $this->transportBuilder = $transportBuilder;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bydn\Logger\Handler;
+namespace Bydn\AdminLogger\Handler;
 
 use Monolog\Logger;
 
@@ -18,21 +18,21 @@ class Notification extends \Monolog\Handler\AbstractHandler
     protected $bubble = true;
 
     /**
-     * @var \Bydn\Logger\Helper\Config
+     * @var \Bydn\AdminLogger\Helper\Config
      */
     private $loggerConfig;
 
     /**
-     * @var \Bydn\Logger\Model\Telegram
+     * @var \Bydn\AdminLogger\Model\Telegram
      */
     private $telegramSender;
 
     /**
-     * @param \Bydn\Logger\Helper\Config $loggerConfig
+     * @param \Bydn\AdminLogger\Helper\Config $loggerConfig
      */
     public function __construct(
-        \Bydn\Logger\Helper\Config $loggerConfig,
-        \Bydn\Logger\Model\Telegram $telegramSender
+        \Bydn\AdminLogger\Helper\Config $loggerConfig,
+        \Bydn\AdminLogger\Model\Telegram $telegramSender
     ) {
         $this->loggerConfig = $loggerConfig;
         $this->telegramSender = $telegramSender;

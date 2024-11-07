@@ -1,16 +1,16 @@
 <?php
 
-namespace Bydn\Logger\Ui\DataProvider\Report;
+namespace Bydn\AdminLogger\Ui\DataProvider\Report;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
-     * @var \Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory
+     * @var \Bydn\AdminLogger\Model\ResourceModel\AdminLog\CollectionFactory
      */
     private $collectionFactory;
 
     /**
-     * @param \Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory $collectionFactory
+     * @param \Bydn\AdminLogger\Model\ResourceModel\AdminLog\CollectionFactory $collectionFactory
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
@@ -18,7 +18,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @param array $data
      */
     public function __construct(
-        \Bydn\Logger\Model\ResourceModel\AdminLog\CollectionFactory $collectionFactory,
+        \Bydn\AdminLogger\Model\ResourceModel\AdminLog\CollectionFactory $collectionFactory,
         string $name,
         string $primaryFieldName,
         string $requestFieldName,

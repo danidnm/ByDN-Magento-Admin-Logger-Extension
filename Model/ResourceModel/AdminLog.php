@@ -1,6 +1,6 @@
 <?php
 
-namespace Bydn\Logger\Model\ResourceModel;
+namespace Bydn\AdminLogger\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
