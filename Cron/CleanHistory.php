@@ -4,10 +4,6 @@ namespace Bydn\AdminLogger\Cron;
 
 use Bydn\AdminLogger\Api\Data\AdminLogInterface;
 
-/**
- * TODO:
- * System config for keep days
- */
 class CleanHistory
 {
     /**
@@ -63,7 +59,10 @@ class CleanHistory
     public function clean()
     {
         // Keep 15 days
-        $keepHistoryDays = 15;
+        $keepHistoryDays = $this->config->getCleanDays();
+        if (!is_numeric($keepHistoryDays)) {
+            $keepHistoryDays = 15;
+        }
         $cutTimestamp = $this->dateTime->timestamp() - (86400 * $keepHistoryDays);
         $date = $this->dateTime->date('Y-m-d h:i:s', $cutTimestamp);
 

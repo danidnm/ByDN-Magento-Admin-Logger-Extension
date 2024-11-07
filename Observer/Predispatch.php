@@ -134,10 +134,10 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
             $valueTest = null;
             switch ($filter['filter_type']) {
                 case FilterType::TYPE_MODULE:
-                    $valueTest = $request->getModuleName();
+                    $valueTest = $request->getControllerModule();
                     break;
                 case FilterType::TYPE_CONTROLLER_MODULE:
-                    $valueTest = $request->getControllerModule();
+                    $valueTest = $request->getModuleName();
                     break;
                 case FilterType::TYPE_CONTROLLER_NAME:
                     $valueTest = $request->getControllerName();

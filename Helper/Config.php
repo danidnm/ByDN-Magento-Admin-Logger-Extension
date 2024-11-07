@@ -6,6 +6,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
 {
     private const LOGGER_ADMIN_LOGGER_ENABLE = 'bydn_admin_logger/general/enable';
     private const LOGGER_ADMIN_LOGGER_FILTERS = 'bydn_admin_logger/general/filters';
+    private const LOGGER_ADMIN_LOGGER_CLEAN_AFTER = 'bydn_admin_logger/general/clean_after';
 
     /**
      * Returns if admin logger is enabled
@@ -32,6 +33,21 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(
             self::LOGGER_ADMIN_LOGGER_FILTERS,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    /**
+     * Returns days of clean up log entries
+     *
+     * @param null|int|string $storeId
+     * @return mixed
+     */
+    public function getCleanDays($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::LOGGER_ADMIN_LOGGER_CLEAN_AFTER,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $storeId
         );
