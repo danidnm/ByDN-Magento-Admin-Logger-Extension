@@ -62,8 +62,7 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
         \Bydn\AdminLogger\Model\AdminLogFactory $adminLogFactory,
         \Bydn\AdminLogger\Helper\Config $loggerConfig,
         \Psr\Log\LoggerInterface $logger
-    )
-    {
+    ) {
         $this->authSession = $authSession;
         $this->jsonSerializer = $jsonSerializer;
         $this->adminLogResource = $adminLogResource;
@@ -73,6 +72,8 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
     }
 
     /**
+     * Executes the pre dispatch logic
+     *
      * @param \Magento\Framework\Event\Observer $observer
      * @return void
      */
@@ -120,7 +121,7 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
     /**
      * Check and returns if the request must be filtered
      *
-     * @param $request
+     * @param  \Magento\Framework\App\RequestInterface $request
      * @return bool
      */
     private function filterRequest($request)
@@ -160,6 +161,8 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
     }
 
     /**
+     * Filter some request parameters to avoid clear passwords
+     *
      * @return array
      */
     private function collectRequestParams()
