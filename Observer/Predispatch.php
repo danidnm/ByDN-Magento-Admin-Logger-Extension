@@ -3,6 +3,7 @@
 namespace Bydn\AdminLogger\Observer;
 
 use Bydn\AdminLogger\Api\Data\AdminLogInterface;
+use Bydn\AdminLogger\Block\Adminhtml\Form\Field\Type as FilterType;
 
 class Predispatch implements \Magento\Framework\Event\ObserverInterface
 {
@@ -85,6 +86,11 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
         // Extract request
         $this->request = $observer->getData('request');
 
+        // Check filters
+        if ($this->filterRequest($this->request)) {
+            return;
+        }
+
         // New log entry
         $adminLog = $this->adminLogFactory->create();
 
@@ -93,11 +99,6 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
         $adminLog->setControllerName($this->request->getControllerName() ?: '');
         $adminLog->setActionName($this->request->getActionName() ?: '');
         $adminLog->setUserIp($this->request->getClientIp() ?: '');
-
-        // Skip Magento_Ui
-        if ($adminLog->getControllerModule() == 'Magento_Ui') {
-            return;
-        }
 
         // User data if exists
         $user = $this->authSession->getUser();
@@ -114,6 +115,48 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
 
         // Save log entry
         $this->adminLogResource->save($adminLog);
+    }
+
+    /**
+     * Check and returns if the request must be filtered
+     *
+     * @param $request
+     * @return bool
+     */
+    private function filterRequest($request)
+    {
+        // Get active filters
+        $filters = $this->loggerConfig->getAdminLoggerFilters();
+        $filters = json_decode($filters, true);
+
+        // Check every filter against the request
+        foreach ($filters as $filter) {
+            $valueTest = null;
+            switch ($filter['filter_type']) {
+                case FilterType::TYPE_MODULE:
+                    $valueTest = $request->getModuleName();
+                    break;
+                case FilterType::TYPE_CONTROLLER_MODULE:
+                    $valueTest = $request->getControllerModule();
+                    break;
+                case FilterType::TYPE_CONTROLLER_NAME:
+                    $valueTest = $request->getControllerName();
+                    break;
+                case FilterType::TYPE_ACTION_NAME:
+                    $valueTest = $request->getActionName();
+                    break;
+                case FilterType::TYPE_USER:
+                    $valueTest = $this->authSession->getUser()->getUsername();
+                    break;
+            }
+            if ($valueTest != null) {
+                if (stripos($valueTest, $filter['value']) !== false) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**

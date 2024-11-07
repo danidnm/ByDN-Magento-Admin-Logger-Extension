@@ -13,6 +13,12 @@
                     <label>Enable admin logger</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="filters" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Filters to apply</label>
+                    <frontend_model>Bydn\AdminLogger\Block\Adminhtml\Form\Field\Filter</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Requests that matches these filters, will not be logged</comment>
+                </field>
             </group>
         </section>
     </system>
