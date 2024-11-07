@@ -6,10 +6,13 @@ use Magento\CatalogInventory\Block\Adminhtml\Form\Field\Customergroup;
 
 class Filter extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray
 {
+    /**
+     * @var \Bydn\AdminLogger\Block\Adminhtml\Form\Field\Type
+     */
     private $filterTypeRenderer;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _prepareToRender()
     {
@@ -32,6 +35,12 @@ class Filter extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\A
         $this->_addButtonLabel = __('Add Filter');
     }
 
+    /**
+     * Returns the renderer for the type field
+     *
+     * @return Type|(Type&\Magento\Framework\View\Element\BlockInterface)|\Magento\Framework\View\Element\BlockInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     protected function getFilterTypeRenderer()
     {
         if (!$this->filterTypeRenderer) {
@@ -62,29 +71,5 @@ class Filter extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\A
             'option_extra_attrs',
             $optionExtraAttr
         );
-    }
-
-    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
-    {
-        $html = parent::_getElementHtml($element);
-
-//        $script = '<script type="text/javascript">
-//                require(["jquery", "jquery/ui", "mage/calendar"], function ($) {
-//                    $(function(){
-//                        function bindDatePicker() {
-//                            setTimeout(function() {
-//                                $(".appointment-slot").datepicker( { dateFormat: "yy/mm/dd" } );
-//                            }, 50);
-//                        }
-//                        bindDatePicker();
-//                        $("button.action-add").on("click", function(e) {
-//                            bindDatePicker();
-//                        });
-//                    });
-//                });
-//            </script>';
-//        $html .= $script;
-
-        return $html;
     }
 }

@@ -14,19 +14,8 @@ class Type extends Select
     public const TYPE_USER = 5;
 
     /**
-     * CustomColumn constructor.
+     * Set input name
      *
-     * @param Context $context
-     * @param array $data
-     */
-    public function __construct(
-        Context $context,
-        array $data = []
-    ) {
-        parent::__construct($context, $data);
-    }
-
-    /**
      * @param string $value
      * @return $this
      */
@@ -64,4 +53,3 @@ class Type extends Select
         ];
     }
 }
-
