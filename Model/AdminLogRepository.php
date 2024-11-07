@@ -15,11 +15,6 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Psr\Log\LoggerInterface as Logger;
 
-/**
- * Admin log repository
- *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class AdminLogRepository implements AdminLogRepositoryInterface
 {
     /**
@@ -57,6 +52,15 @@ class AdminLogRepository implements AdminLogRepositoryInterface
      */
     private $logger;
 
+    /**
+     * @param AdminLogResource $resource
+     * @param AdminLogFactory $adminLogFactory
+     * @param AdminLogInterfaceFactory $adminLogInterfaceFactory
+     * @param AdminLogCollectionFactory $collectionFactory
+     * @param AdminLogSearchResultsInterfaceFactory $searchResultsFactory
+     * @param CollectionProcessorInterface $collectionProcessor
+     * @param Logger $logger
+     */
     public function __construct(
         AdminLogResource                      $resource,
         AdminLogFactory                       $adminLogFactory,
