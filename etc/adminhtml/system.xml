@@ -20,7 +20,7 @@
                     <label>Filters to apply</label>
                     <frontend_model>Bydn\AdminLogger\Block\Adminhtml\Form\Field\Filter</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Requests that matches ANY of these filters, will not be logged</comment>
+                    <comment>Requests that matches ANY of these filters, will not be logged. Recommended to filter Magento_Ui for Module name.</comment>
                 </field>
             </group>
         </section>
