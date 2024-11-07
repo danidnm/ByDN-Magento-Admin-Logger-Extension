@@ -10,8 +10,8 @@ use Magento\Framework\View\Result\Page;
  */
 class Report extends Action
 {
-    const MENU_ID = 'Bydn_AdminLogger::report_logger_report';
-    const ADMIN_RESOURCE = 'Bydn_AdminLogger::report_logger_report';
+    public const MENU_ID = 'Bydn_AdminLogger::report_logger_report';
+    public const ADMIN_RESOURCE = 'Bydn_AdminLogger::report_logger_report';
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory
@@ -31,13 +31,15 @@ class Report extends Action
     }
 
     /**
+     * Executes the controller
+     *
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|Page
      */
-    public function execute() {
+    public function execute()
+    {
         $resultPage = $this->_resultPageFactory->create();
         $resultPage->setActiveMenu(static::MENU_ID);
         $resultPage->getConfig()->getTitle()->prepend('Admin Logger');
         return $resultPage;
     }
-
 }
