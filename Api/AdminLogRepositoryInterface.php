@@ -32,5 +32,7 @@ interface AdminLogRepositoryInterface
      * @return \Bydn\AdminLogger\Api\Data\AdminLogInterface
      * @throws LocalizedException
      */
-    public function save(\Bydn\AdminLogger\Api\Data\AdminLogInterface $logEntry): \Bydn\AdminLogger\Api\Data\AdminLogInterface;
+    public function save(
+        \Bydn\AdminLogger\Api\Data\AdminLogInterface $logEntry
+    ): \Bydn\AdminLogger\Api\Data\AdminLogInterface;
 }
