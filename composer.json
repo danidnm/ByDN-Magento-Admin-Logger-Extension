@@ -7,7 +7,7 @@
     "type": "magento2-module",
     "version": "2.0.0",
     "license": [
-        "MIT License"
+        "MIT"
     ],
     "autoload": {
         "files": [
