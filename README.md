@@ -8,6 +8,14 @@ This administrator-focused extension introduces an admin logger, enabling Magent
 - Allows filtering request based on Module Name, Controller, Action and Administrator User to allow focussing on what is really important.
 - Automatic Log entries clean up to avoid excessive growth of the logger tables.
 
+# Instalation
+
+Run:
+```
+composer require bydn/admin-logger
+./bin/magento module:enable Bydn_AdminLogger
+./bin/magento setup:upgrade
+```
 # Configuration
 
 Access the configuration going to:
