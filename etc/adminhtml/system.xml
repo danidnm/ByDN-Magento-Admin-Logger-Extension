@@ -17,10 +17,10 @@
                     <label>Clean log entries after (days)</label>
                 </field>
                 <field id="filters" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Filters to apply</label>
+                    <label>Exclusions to apply</label>
                     <frontend_model>Bydn\AdminLogger\Block\Adminhtml\Form\Field\Filter</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Requests that matches ANY of these filters, will not be logged. Recommended to filter Magento_Ui for Module name.</comment>
+                    <comment>Requests that matches ANY of these conditions, WILL NOT BE LOGGED.</comment>
                 </field>
             </group>
         </section>
