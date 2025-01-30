@@ -177,10 +177,23 @@ class Predispatch implements \Magento\Framework\Event\ObserverInterface
             unset($params['key']);
             unset($params['token']);
             unset($params['uenc']);
+            unset($params['form_key']);
 
             // Remove passwords
             if (isset($params['login']['password'])) {
                 $params['login']['password'] = '***';
+            }
+            if (isset($params['login']['password_confirmation'])) {
+                $params['login']['password'] = '***';
+            }
+            if (isset($params['current_password'])) {
+                $params['current_password'] = '***';
+            }
+            if (isset($params['password'])) {
+                $params['password'] = '***';
+            }
+            if (isset($params['password_confirmation'])) {
+                $params['password_confirmation'] = '***';
             }
         }
 
