@@ -10,17 +10,23 @@
             <resource>Bydn_AdminLogger::config</resource>
             <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Enable admin logger</label>
+                    <label>Enable module</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If not enabled, the module is completely disabled.</comment>
+                </field>
+                <field id="enable_logger" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable logger</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If not enabled, you can access old logs but new request will not be logged.</comment>
                 </field>
                 <field id="clean_after" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Clean log entries after (days)</label>
                 </field>
                 <field id="filters" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Exclusions to apply</label>
+                    <label>Exclusions</label>
                     <frontend_model>Bydn\AdminLogger\Block\Adminhtml\Form\Field\Filter</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Requests that matches ANY of these conditions, WILL NOT BE LOGGED.</comment>
+                    <comment>No new requests that matches any of these conditions will be logged. Old request already logged will remain visible until cleaned (after cleaning days)</comment>
                 </field>
             </group>
         </section>

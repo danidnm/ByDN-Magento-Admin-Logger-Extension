@@ -3,8 +3,8 @@
     <menu>
 
         <!-- Reports -->
-        <add id="Magento_Reports::report_logger" title="Admin Log" translate="title" module="Magento_Backend" sortOrder="991" parent="Magento_Reports::report" resource="Bydn_AdminLogger::report_logger"/>
-        <add id="Bydn_AdminLogger::report_logger_report" title="See logs" module="Bydn_AdminLogger" sortOrder="35" resource="Bydn_AdminLogger::report_logger_report" parent="Magento_Reports::report_logger" action="bydnlogger/logger/report" />
+        <add id="Magento_Reports::report_logger" title="Admin Log" translate="title" module="Magento_Backend" sortOrder="991" parent="Magento_Reports::report" resource="Bydn_AdminLogger::report_logger" dependsOnConfig="bydn_admin_logger/general/enable"/>
+        <add id="Bydn_AdminLogger::report_logger_report" title="See logs" module="Bydn_AdminLogger" sortOrder="35" resource="Bydn_AdminLogger::report_logger_report" parent="Magento_Reports::report_logger" action="bydnlogger/logger/report" dependsOnConfig="bydn_admin_logger/general/enable" />
 
     </menu>
 </config>
